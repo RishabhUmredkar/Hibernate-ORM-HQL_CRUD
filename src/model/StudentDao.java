@@ -7,6 +7,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
 
 public class StudentDao {
 
@@ -32,4 +34,14 @@ public class StudentDao {
 		
 	}
 
+	public static List<Student> getAllRecord(){
+		List<Student> ul = new ArrayList<>();
+		Session s1= StudentDao.getSession();
+		Query q = s1.createQuery("From Student");
+		ul= q.list();
+		s1.close();
+		
+		return ul;
+		
+	}
 }

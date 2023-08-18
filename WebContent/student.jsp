@@ -20,9 +20,11 @@ int a = StudentDao.SaveStudent(s1);
 if(a>0)
 {
 	out.print("data inserted");
+	response.sendRedirect("show.jsp");
 
 //	Query<Student> query = s2.cre
 }
+
 %>
 </body>
 </html>
