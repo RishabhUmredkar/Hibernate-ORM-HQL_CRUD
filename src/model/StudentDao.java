@@ -44,4 +44,18 @@ public class StudentDao {
 		return ul;
 		
 	}
+	
+	public static int deleteStudent(int id){
+		Session s1 = StudentDao.getSession();
+		Transaction tx = s1.beginTransaction();
+		Query q = s1.createQuery("delete From Student where id=:i");
+		q.setParameter("i", id);
+		int status = q.executeUpdate();
+		System.out.println("Object is saved successfully........");
+		tx.commit();
+		s1.close();
+		return status;
+		
+	}
+	
 }
