@@ -58,4 +58,20 @@ public class StudentDao {
 		
 	}
 	
+	public static Student getStudent(int id) {
+	    Session session = StudentDao.getSession();
+	    Transaction tx = session.beginTransaction();
+
+	    Query query = session.createQuery("from Student where id = :i");
+	    query.setParameter("i", id);
+
+	    Student student = (Student) query.uniqueResult(); // Assuming 'id' is unique for students
+
+	    tx.commit();
+	    session.close();
+
+	    return student;
+	}
+
+	
 }
