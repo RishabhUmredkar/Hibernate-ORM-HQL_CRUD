@@ -79,8 +79,9 @@ public class StudentDao {
 		Transaction tx=session.beginTransaction();  
 		  System.out.println("id "+st.getId());
 
-		Query q=session.createQuery("update Student set name=:n where id=:i");  
+		Query q=session.createQuery("update Student set name=:n , pass=:p where id=:i");  
 		q.setParameter("n", st.getName());  
+		q.setParameter("p", st.getPass());
 		q.setParameter("i",st.getId());  
 		  System.out.println("id "+st.getId());
 		int status=q.executeUpdate();  
