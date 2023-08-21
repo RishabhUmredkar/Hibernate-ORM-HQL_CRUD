@@ -73,5 +73,18 @@ public class StudentDao {
 	    return student;
 	}
 
+	public static int update(Student st)
+	{
+	    Session session = StudentDao.getSession();
+		Transaction tx=session.beginTransaction();  
+		Query q=session.createQuery("update Student set name=:n where id=:i");  
+		q.setParameter("n", st.getName());  
+		q.setParameter("i",st.getId());  
+		  
+		int status=q.executeUpdate();  
+		System.out.println(status);  
+		tx.commit();
+		return status;
+	}
 	
 }
