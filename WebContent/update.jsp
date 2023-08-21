@@ -15,7 +15,7 @@ int id = Integer.parseInt(request.getParameter("id"));
 String name = request.getParameter("name");
 String pass = request.getParameter("pass");
 
-Student st = new Student(name , pass);
+Student st = new Student(id, name , pass);
 int  a = new StudentDao().update(st);
 if (a>0)
 {
@@ -24,7 +24,7 @@ if (a>0)
 }
 else{
 	out.print("error");
-	response.sendRedirect("show.jsp");
+	out.print("update page "+id);
 
 }
 %>

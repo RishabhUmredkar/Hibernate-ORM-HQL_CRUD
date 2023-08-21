@@ -77,12 +77,15 @@ public class StudentDao {
 	{
 	    Session session = StudentDao.getSession();
 		Transaction tx=session.beginTransaction();  
+		  System.out.println("id "+st.getId());
+
 		Query q=session.createQuery("update Student set name=:n where id=:i");  
 		q.setParameter("n", st.getName());  
 		q.setParameter("i",st.getId());  
-		  
+		  System.out.println("id "+st.getId());
 		int status=q.executeUpdate();  
 		System.out.println(status);  
+		System.out.println("error");
 		tx.commit();
 		return status;
 	}
