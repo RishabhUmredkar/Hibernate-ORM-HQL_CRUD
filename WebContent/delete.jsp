@@ -1,3 +1,6 @@
+<%@page import="org.hibernate.Transaction"%>
+<%@page import="model.Student"%>
+=<%@page import="org.hibernate.Session"%>
 <%@page import="model.StudentDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -12,12 +15,28 @@
 <%
 int id = Integer.parseInt(request.getParameter("id"));
 
-int status = StudentDao.deleteStudent(id);
+Session s = StudentDao.getSession();
+Transaction tx = s.beginTransaction();
+Student st=(Student)s.get(Student.class, id);
+s.delete(st);
+tx.commit();
+s.close();
+
+
+response.sendRedirect("show.jsp");
+
+
+
+%>
+
+<!-- int status = StudentDao.deleteStudent(id);
 
 if(status>0)
 {
 	response.sendRedirect("show.jsp");
 }
+-->
+
 %>
 </body>
 </html>
