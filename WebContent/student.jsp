@@ -1,3 +1,5 @@
+<%@page import="org.hibernate.Transaction"%>
+<%@page import="org.hibernate.Session"%>
 <%@page import="org.hibernate.query.Query"%>
 <%@page import="model.Student"%>
 <%@page import="model.StudentDao"%>
@@ -16,8 +18,18 @@ String name = request.getParameter("name");
 String pass = request.getParameter("pass");
 
 Student s1 = new Student(id, name, pass);
-int a = StudentDao.SaveStudent(s1);
-if(a>0)
+
+Session s = StudentDao.getSession();
+
+Transaction tx = s.beginTransaction();
+
+
+s.save(s1);
+
+tx.commit();
+s.close();
+//int a = StudentDao.SaveStudent(s1);
+if(s!=null)
 {
 	out.print("data inserted");
 	response.sendRedirect("show.jsp");
