@@ -17,8 +17,11 @@ int id = Integer.parseInt(request.getParameter("id"));
 
 Session s = StudentDao.getSession();
 Transaction tx = s.beginTransaction();
+
 Student st=(Student)s.get(Student.class, id);
+
 s.delete(st);
+
 tx.commit();
 s.close();
 

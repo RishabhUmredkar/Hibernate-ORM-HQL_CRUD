@@ -1,3 +1,5 @@
+<%@page import="org.hibernate.query.Query"%>
+<%@page import="org.hibernate.Session"%>
 <%@page import="model.Student"%>
 <%@page import="java.util.List"%>
 <%@page import="model.StudentDao"%>
@@ -86,7 +88,10 @@ tr:nth-child(even) {
 <body>
 
 <%
-List<Student> list = StudentDao.getAllRecord();
+Session s = StudentDao.getSession();
+Query q = s.createQuery("from Student");
+
+List<Student> list = q.list();
 request.setAttribute("list", list);
 %>
 

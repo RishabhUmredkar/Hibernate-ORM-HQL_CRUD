@@ -20,14 +20,13 @@ String pass = request.getParameter("pass");
 Student s1 = new Student(id, name, pass);
 
 Session s = StudentDao.getSession();
-
 Transaction tx = s.beginTransaction();
-
 
 s.save(s1);
 
 tx.commit();
 s.close();
+
 //int a = StudentDao.SaveStudent(s1);
 if(s!=null)
 {
