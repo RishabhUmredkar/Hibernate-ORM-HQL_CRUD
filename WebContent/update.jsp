@@ -1,3 +1,5 @@
+<%@page import="org.hibernate.Transaction"%>
+<%@page import="org.hibernate.Session"%>
 <%@page import="model.StudentDao"%>
 <%@page import="model.Student"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -15,16 +17,25 @@ int id = Integer.parseInt(request.getParameter("id"));
 String name = request.getParameter("name");
 String pass = request.getParameter("pass");
 
-Student st = new Student(id, name , pass);
-int  a = new StudentDao().update(st);
-if (a>0)
+Session s = StudentDao.getSession();
+Transaction tx = s.beginTransaction();
+Student st=(Student)s.get(Student.class, id);
+
+st.setName(name);
+st.setPass(pass);
+
+tx.commit();
+s.close();
+//Student st = new Student(id, name , pass);
+//int  a = new StudentDao().update(st);
+if (st!=null)
 {
 	out.print("value update ");
 	response.sendRedirect("show.jsp");
 }
 else{
-	out.print("error");
-	out.print("update page "+id);
+out.print("error");
+out.print("update page "+id);
 
 }
 %>

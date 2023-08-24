@@ -1,3 +1,4 @@
+<%@page import="org.hibernate.Session"%>
 <%@page import="model.Student"%>
 <%@page import="model.StudentDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -80,12 +81,15 @@
 
 
 <%
-int id = Integer.parseInt(request.getParameter("id"));
 
+int id = Integer.parseInt(request.getParameter("id"));
+Session s = StudentDao.getSession();
+Student st=(Student)s.get(Student.class, id);
+	
 //int status = StudentDao.getStudent(id);
-Student st = null; 
- 	st= new StudentDao().getStudent(id);
- 	
+//Student st = null; 
+//	st= new StudentDao().getStudent(id);
+ 
  	if(st!=null)
  	{
  	%>
